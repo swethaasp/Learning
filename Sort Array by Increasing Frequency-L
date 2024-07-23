@@ -39,7 +39,7 @@ class Solution {
         for(int num :nums){
             list.add(num);
         }
-        
+        //array is converted to list .so it can be sorted using lamda expression and compareTo interface
         
         list.sort((a,b)->{
             int freq=map.get(a).compareTo(map.get(b));
