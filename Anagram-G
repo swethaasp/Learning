@@ -49,3 +49,128 @@ class Solution {
        return true;   
     }
 }
+
+
+
+//using hashmap
+
+import java.util.HashMap;
+
+class Solution {
+    public static boolean isAnagram(String a, String b) {
+        // Check if lengths are the same
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        // Create frequency counters
+        HashMap<Character, Integer> freqMapA = new HashMap<>();
+        HashMap<Character, Integer> freqMapB = new HashMap<>();
+        
+        // Count frequencies for string a
+        for (char ch : a.toCharArray()) {
+            freqMapA.put(ch, freqMapA.getOrDefault(ch, 0) + 1);
+        }
+        
+        // Count frequencies for string b
+        for (char ch : b.toCharArray()) {
+            freqMapB.put(ch, freqMapB.getOrDefault(ch, 0) + 1);
+        }
+        
+        // Compare frequency maps
+        return freqMapA.equals(freqMapB);
+    }
+}
+
+//using Arrays.equals
+import java.util.Arrays;
+
+class Solution {
+    public static boolean isAnagram(String a, String b) {
+        // Check if lengths are the same
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        // Convert strings to char arrays
+        char[] arrA = a.toCharArray();
+        char[] arrB = b.toCharArray();
+        
+        // Sort both arrays
+        Arrays.sort(arrA);
+        Arrays.sort(arrB);
+        
+        // Compare sorted arrays
+        return Arrays.equals(arrA, arrB);
+    }
+}
+
+
+//using Arrays
+class Solution {
+    public static boolean isAnagram(String a, String b) {
+        // Check if lengths are the same
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        // Create frequency arrays
+        int[] countA = new int[26];
+        int[] countB = new int[26];
+        
+        // Count frequencies for string a
+        for (char ch : a.toCharArray()) {
+            countA[ch - 'a']++;
+        }
+        
+        // Count frequencies for string b
+        for (char ch : b.toCharArray()) {
+            countB[ch - 'a']++;
+        }
+        
+        // Compare frequency arrays
+        for (int i = 0; i < 26; i++) {
+            if (countA[i] != countB[i]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
+
+
+//hashmap
+import java.util.HashMap;
+
+class Solution {
+    public static boolean isAnagram(String a, String b) {
+        // Check if lengths are the same
+        if (a.length() != b.length()) {
+            return false;
+        }
+        
+        // Create frequency counter
+        HashMap<Character, Integer> countMap = new HashMap<>();
+        
+        // Count characters in the first string
+        for (char ch : a.toCharArray()) {
+            countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
+        }
+        
+        // Decrease count for characters in the second string
+        for (char ch : b.toCharArray()) {
+            if (!countMap.containsKey(ch)) {
+                return false;
+            }
+            countMap.put(ch, countMap.get(ch) - 1);
+            if (countMap.get(ch) == 0) {
+                countMap.remove(ch);
+            }
+        }
+        
+        // Check if all counts are zero
+        return countMap.isEmpty();
+    }
+}
+
