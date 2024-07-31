@@ -1,0 +1,71 @@
+Given a string, say S, print it in reverse manner eliminating the repeated characters and spaces.
+Example 1:
+Input: S = "GEEKS FOR GEEKS"
+Output: "SKEGROF"
+Example 2:
+
+Input: S = "I AM AWESOME"
+Output: "EMOSWAI"
+
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function reverseString() which takes a string S as input parameter and returns a modified string. 
+
+
+Expected Time Complexity: O(|S|), where |S| denotes length of string.
+Expected Auxiliary Space: O(1).
+
+
+class Solution
+{
+    public String reverseString(String s)
+    {
+        //code here.
+        StringBuilder sb =new StringBuilder(s);
+        String s2=sb.reverse().toString(); //skeeg rof skeeg
+         StringBuilder res =new StringBuilder();
+         String[] s3= s2.split(" ");  //skeeg rof skeeg
+         
+         Set<Character> set =new HashSet<>();
+         for(int i=0;i<s3.length;i++){//skeeg
+         String y =s3[i];  //skeeg
+         for(int j=0;j<y.length();j++){
+             if(!set.contains(y.charAt(j))){
+                 set.add(y.charAt(j));
+                 res.append(y.charAt(j));
+             } 
+         }
+         }
+        return res.toString(); 
+    }
+}
+
+
+
+
+import java.util.*;
+
+class Solution {
+    public static String reverseString(String S) {
+        // Set to keep track of seen characters
+        Set<Character> seen = new HashSet<>();
+        // StringBuilder to build the result string
+        StringBuilder result = new StringBuilder();
+        
+        // Traverse the string from end to start
+        for (int i = S.length() - 1; i >= 0; i--) {
+            char ch = S.charAt(i);
+            // Skip spaces
+            if (ch == ' ') {
+                continue;
+            }
+            // Add to result if character has not been seen before
+            if (!seen.contains(ch)) {
+                seen.add(ch);
+                result.append(ch);
+            }
+        }
+        
+        return result.toString();
+    }
+}
