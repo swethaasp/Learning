@@ -1,0 +1,56 @@
+Given a string, your task is to reverse the string keeping the spaces intact to their positions.
+
+Example 1:
+
+Input:
+S = "Help others"
+Output: sreh topleH
+Explanation: The space is intact at index 4
+while all other characters are reversed.
+Example 2:
+
+Input: 
+S = "geeksforgeeks"
+Output: skeegrofskeeg
+Explanation: No space present, hence the
+entire string is reversed.
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function reverseWithSpacesIntact() which takes the string S as input and returns the resultant string by reversing the string while keeping all the spaces intact.
+
+
+Expected Time Complexity: O(|S|).
+Expected Auxiliary Space: O(1).
+
+
+Constraints:
+1<=|S|<=105
+
+class Solution
+{
+    String reverseWithSpacesIntact(String S)
+    {
+        // your code here
+        List<Character> list =new ArrayList<>();
+        for(int i=0;i<S.length();i++){
+            if(S.charAt(i)!=' '){
+                list.add(S.charAt(i));
+            }
+        }
+        
+        Collections.reverse(list);
+        StringBuilder sb =new StringBuilder();
+        int index=0;
+        
+        for(int j=0;j<S.length();j++){
+            if(S.charAt(j)!=' '){
+                sb.append(list.get(index));
+                index++;
+            }
+            else{
+                sb.append(' ');
+            }
+        }
+        return sb.toString();
+    }
+}
