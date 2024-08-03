@@ -1,0 +1,68 @@
+Given an array arr, return the second largest distinct element from an array. If the second largest element doesn't exist then return -1.
+
+Examples:
+
+Input: arr = [12, 35, 1, 10, 34, 1]
+Output: 34
+Explanation: The largest element of the array is 35 and the second largest element is 34.
+Input: arr = [10, 10]
+Output: -1
+Explanation: The largest element of the array is 10 and the second largest element does not exist so answer is -1.
+Expected Time Complexity: O(n)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+2 ≤ arr.size() ≤ 105
+1 ≤ arri ≤ 105
+
+
+class Solution {
+    public int print2largest(List<Integer> arr) {
+        // Code Here
+        Collections.sort(arr);
+        int largest=arr.get(0);
+        int secLargest=-1;
+        for(int i=1;i<arr.size();i++){
+            if(arr.get(i)>largest){
+                largest=arr.get(i);
+            }
+        }
+        
+        for(int j=arr.size()-1;j>=0;j--){
+            if(arr.get(j)!=largest){
+               secLargest=arr.get(j);
+               break;
+            }
+        }
+        return secLargest;
+    }
+}
+
+
+//coding ninjas
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int findSecondLargest(int n, int[] arr) {
+		// Write your code here.
+		int largest =arr[0];
+		int secondLargest=Integer.MIN_VALUE;
+
+		for(int i=1;i<n;i++){
+			if(arr[i]>largest){
+				secondLargest=largest;
+				largest=arr[i];
+			}
+
+			else if(arr[i]<largest && arr[i]>secondLargest){
+				secondLargest=arr[i];
+			}
+		}
+
+		if(secondLargest==Integer.MIN_VALUE){
+			return -1;
+		}
+      return secondLargest;
+	}
+}
