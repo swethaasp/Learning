@@ -84,3 +84,26 @@ class Solve {
 
 
 
+ Mathematical approach
+      
+      long SN  = n *(n+1)/2;   //sum of n natu no.
+      long SN2 =  (n*(n+1) *(2*n+1))/6;   //sum of sq of n nat nos
+      
+      long sum=0;
+      long sumsq=0;
+      
+      for(int i=0;i<n;i++){
+          sum=sum + (long)arr[i];      //actual sum
+          sumsq= sumsq + (long)arr[i]* (long)arr[i];  //actual sum of sq
+      }
+      
+      long val1 = sum-SN;
+      long val2 = sumsq - SN2;
+      val2=val2/val1;
+      
+      long x = val1+val2/2;   //repeating
+      long y =x-val1;  //missing
+      
+      int[]  res = {(int)x,(int)y};
+      return res;
+
