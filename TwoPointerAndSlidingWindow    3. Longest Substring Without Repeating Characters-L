@@ -1,0 +1,119 @@
+Given a string s, find the length of the longest substring without repeating characters.
+
+ 
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+ 
+
+Constraints:
+
+0 <= s.length <= 5 * 104
+s consists of English letters, digits, symbols and spaces.
+Accepted
+6,095,336
+Submissions
+17,328,690
+
+//Slinding window 2 pointer algorithm
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        
+        
+        int[]  hash = new int[256];
+        Arrays.fill(hash,-1);
+        int l=0;
+        int r=0;
+        int maxlen=0;
+        int n=s.length();
+        
+        while(r<n){
+            if(hash[s.charAt(r)]!=-1){  //element found already
+                if(hash[s.charAt(r)]>=l){
+                    l=hash[s.charAt(r)]+1;  //update left
+                }
+            }
+            
+        int len=r-l+1;
+        maxlen=Math.max(len,maxlen);
+        hash[s.charAt(r)]=r;
+        r++;
+        }
+        
+        
+        return maxlen;
+    }
+}
+
+//bruteforce
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+       
+        
+        // Get the length of
+        // the input string
+        int n = s.length();
+        
+        // Variable to store the
+        // maximum length of substring found
+        int maxLen = 0;
+        
+        // Outer loop to set the
+        // starting point of the substring
+        for (int i = 0; i < n; i++) {
+            
+            // Initialize the hash array to keep
+            // track of characters in the current substring
+            
+            // Using 256 to cover all ASCII characters
+            int[] hash = new int[256]; 
+            Arrays.fill(hash, 0);
+            
+            // Inner loop to extend the
+            // substring from the starting point i
+            for (int j = i; j < n; j++) {
+                
+                // If the character s[j] is already
+                // in the hash, break the inner loop
+                if (hash[s.charAt(j)] == 1) {
+                    break;
+                }
+                
+                // Mark the character s[j]
+                // as present in the hash
+                hash[s.charAt(j)] = 1;
+                
+                // Calculate the length
+                // of the current substring
+                int len = j - i + 1;
+                
+                // Update maxLen if the
+                // current substring length is
+                // greater than the previous
+                // maximum length
+                maxLen = Math.max(len, maxLen);
+            }
+        }
+        
+        // Return the maximum
+        // length of substring found
+        return maxLen;
+    }
+}
+
+                                
