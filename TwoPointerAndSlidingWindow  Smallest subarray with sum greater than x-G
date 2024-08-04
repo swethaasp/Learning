@@ -1,0 +1,47 @@
+Given a number x and an array of integers arr, find the smallest subarray with sum greater than the given value. If such a subarray do not exist return 0 in that case.
+
+Examples:
+
+Input: x = 51, arr[] = [1, 4, 45, 6, 0, 19]
+Output: 3
+Explanation: Minimum length subarray is [4, 45, 6]
+Input: x = 100, arr[] = [1, 10, 5, 2, 7]
+Output: 0
+Explanation: No subarray exist
+Expected Time Complexity: O(n)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ arr.size, x ≤ 105
+0 ≤ arr[] ≤ 104
+
+
+
+class Solution {
+
+    public static int smallestSubWithSum(int x, int[] arr) {
+        // Your code goes here
+        int n=arr.length;
+        int minlen=Integer.MAX_VALUE;
+        int l=0;
+        int r=0;
+        int sum=0;
+       
+        while(r<n){
+           sum=sum+arr[r];
+           
+           while(sum>x  &&  l<=r){
+               minlen=Math.min(minlen,r-l+1);
+               sum=sum-arr[l];
+               l=l+1;
+           }
+              
+               r=r+1;
+        }
+        
+        if(minlen==Integer.MAX_VALUE){
+          return 0;  
+        }
+        return minlen;
+    }
+}
