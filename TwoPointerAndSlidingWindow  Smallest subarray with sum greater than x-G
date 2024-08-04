@@ -45,3 +45,49 @@ class Solution {
         return minlen;
     }
 }
+
+
+//Brute force approach
+
+
+class Solution {
+
+    public static int smallestSubWithSum(int x, int[] arr) {
+        // Your code goes here
+        int minLen = Integer.MAX_VALUE;
+
+        // Loop through each possible
+        // start index of the subarray
+        for(int start = 0; start < arr.length; start++){
+            // Initialize the current
+            // sum to 0 for each start index
+            int currentSum = 0;
+
+            // Loop through each possible end
+            // index of the subarray starting
+            // from the current start index
+            for(int end = start; end <arr.length; end++){
+                // Add the current element
+                // to the current sum
+                currentSum += arr[end];
+
+                // If the current sum is
+                // greater than or equal
+                // to the target, update the
+                // minimum length if necessary
+                if(currentSum >=x){
+                    minLen = Math.min(minLen, end - start + 1);
+                }
+            }
+        }
+        // If minLen remains Integer.MAX_VALUE,
+        // it means no subarray satisfies
+        // the condition, so return 0
+        if(minLen == Integer.MAX_VALUE){
+            return 0;
+        }
+        // Otherwise, return the
+        // minimum length found
+        return minLen;
+    }
+    }
