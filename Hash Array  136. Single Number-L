@@ -44,4 +44,52 @@ class Solution {
     }
 }
 
+//hashArray
+class Solution {
+    public int singleNumber(int[] nums) {
+         int n = nums.length;
 
+        // Find the maximum element:
+        int maxi = nums[0];
+        for (int i = 0; i < n; i++) {
+            maxi = Math.max(maxi, nums[i]);
+        }
+
+        // Declare hash array of size maxi+1
+        // And hash the given array:
+        int[] hash = new int[maxi + 1];
+        for (int i = 0; i < n; i++) {
+            hash[nums[i]]++;
+        }
+
+        //Find the single element and return the answer:
+        for (int i = 0; i < n; i++) {
+            if (hash[nums[i]] == 1)
+                return nums[i];
+        }
+
+        //This line will never execute
+        //if the array contains a single element.
+        return -1;
+    }
+}  //but gives runtime error (because 10^9 can be the element.so hash array wont work for it)
+
+
+//using hashmap
+class Solution {
+    public int singleNumber(int[] nums) {
+         int n = nums.length;
+
+        HashMap<Integer,Integer> map =new HashMap<>();
+        for(int i=0;i<n;i++){
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+        
+       for( Map.Entry<Integer,Integer> entry :  map.entrySet()){
+           if(entry.getValue()==1){
+               return entry.getKey();
+           }
+       }
+        return -1;
+    }
+}
